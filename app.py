@@ -1,40 +1,42 @@
 # ============================================================
-# Sistema de Desconto Progressivo - Loja Online
-# Aluno: Natali
-# Atividade: Ag6_DS_I
+# Calculadora de Consumo Elétrico Inteligente (Recuperação Ag5)
+# Aluna: Natali Alves dos Santos Louro
+# Atividade: NataliLouro_Rec_Ag5_DS_I
 # ============================================================
 
-def calcular_desconto_compra():
+def calcular_consumo_eletrico():
+    print("=== CALCULADORA DE CONSUMO ELÉTRICO INTELIGENTE ===")
+    
+    # 1. Entrada de dados
+    aparelho = input("Digite o nome do aparelho (ex.: Geladeira): ")
+    
     try:
-        # Entrada de dados: solicita o valor total da compra ao usuário
-        valor_compra = float(input("Digite o valor total da compra (R$): "))
+        potencia = float(input("Digite a potência do aparelho em Watts (W): "))
+        horas_dia = float(input("Digite o tempo médio de uso diário em horas: "))
         
-        # Validação para evitar valores zerados ou negativos
-        if valor_compra <= 0:
-            print("Por favor, informe um valor válido e maior que zero.")
+        if potencia <= 0 or horas_dia <= 0:
+            print("Por favor, digite valores positivos e maiores que zero.")
             return
 
-        # Estrutura condicional para determinar o percentual de desconto
-        if valor_compra < 200.00:
-            percentual_desconto = 0.05  # 5% de desconto
-        elif valor_compra < 300.00:
-            percentual_desconto = 0.10  # 10% de desconto
-        else:
-            percentual_desconto = 0.15  # 15% de desconto
+        # 2. Cálculo do consumo mensal em kWh
+        # Fórmula: consumoMensal = (potencia * horasDia * 30) / 1000
+        consumo_mensal = (potencia * horas_dia * 30) / 1000
+        
+        # Custo estimado (Tarifa fixa de R$ 0,75 por kWh)
+        tarifa_kwh = 0.75
+        custo_estimado = consumo_mensal * tarifa_kwh
 
-        # Processamento: cálculo do valor do desconto e total final a pagar
-        valor_desconto = valor_compra * percentual_desconto
-        valor_final = valor_compra - valor_desconto
-
-        # Saída de dados: exibição dos resultados formatados
-        print("\n--- RESUMO DA COMPRA ---")
-        print(f"Valor original da compra: R$ {valor_compra:.2f}")
-        print(f"Desconto aplicado ({int(percentual_desconto * 100)}%): R$ {valor_desconto:.2f}")
-        print(f"Valor final a pagar: R$ {valor_final:.2f}")
+        # 3. Exibição do resultado formatado
+        print("\n" + "="*40)
+        print("RESUMO DO CONSUMO ESTIMADO")
+        print("="*40)
+        print(f"Aparelho: {aparelho}")
+        print(f"Consumo estimado: {consumo_mensal:.2f} kWh/mês")
+        print(f"Custo mensal estimado (R$ 0,75/kWh): R$ {custo_estimado:.2f}")
+        print("="*40)
 
     except ValueError:
-        print("Erro: Entrada inválida. Digite apenas números para o valor da compra.")
+        print("Erro: Entrada inválida. Digite apenas números para potência e horas.")
 
-# Execução do programa
 if __name__ == "__main__":
-    calcular_desconto_compra()
+    calcular_consumo_eletrico()

@@ -35,3 +35,4 @@ def calcular_consumo_energia():
 # Execução do programa
 if __name__ == "__main__":
     calcular_consumo_energia()
+    
